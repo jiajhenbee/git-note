@@ -16,7 +16,7 @@ git-note
 git status
 ```
 
-功能：
+功能：查看目前 branch 中所有檔案的狀態
 
 ### Staging (TBD)
 
@@ -34,7 +34,7 @@ git reset fileName
 git commit -m "commit 說明"
 ```
 
-功能：
+功能：提交每一次的新增/修改/刪減
 
 ### Remote (TBD)
 
@@ -47,13 +47,13 @@ git commit -m "commit 說明"
 git fetch origin [-p]
 ```
 
-功能：
+功能：將遠端的 origin marster 主支下載最新的版本到本機
 
 ```
 git pull origin master
 ```
 
-功能：
+功能：將 origin marster 下載最新的版本到本機並合併
 
 > `git pull` 相當於 `git fetch` + `git merge`
 
