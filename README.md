@@ -60,10 +60,9 @@ git pull origin master
 ```
 git pull origin master
 
-# 相當於底下三個步驟：
+# 相當於底下兩個步驟：
 
 git fetch origin
-git checkout master
 git merge origin/master
 ```
 
