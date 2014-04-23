@@ -26,6 +26,23 @@ git-note
 
 ## 指令動作
 
+### 開始一個專案
+
+```
+git clone https://github.com/jiajhenbee/git-note.git
+```
+
+* 把 `https://github.com/jiajhenbee/git-note.git` 上的專案 (已經存在的專案) 下載下來到 `git-note` 資料夾
+* 預設的 remote 名稱是 `origin`
+
+```
+git init
+```
+
+* 在目前資料夾開始一個全新的專案
+* remote 初始狀態是空的，還未設定
+
+
 ### Status
 
 ```
