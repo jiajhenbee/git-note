@@ -3,9 +3,25 @@ git-note
 
 ## 名詞
 
-* commit
+### repository
 
-* branch
+* 裝載 git 記錄的盒子
+* 分為本機 (local) 和遠端 (remote) 兩種類型
+* 不同盒子之間可以互相同步
+
+### commit
+
+* 檔案儲存的狀態，包含儲存哪些檔案，儲存的時間，儲存變更的作者
+
+### branch
+
+* 一個有名稱的標籤，會隨著 commit 增加而移動
+* 這個標籤之前的所有 commits 串起來的連線稱為一個分支 (branch)
+* 每個專案預設的 branch 名稱叫做 `master`
+
+### remote
+
+* 遠端 repository
 
 
 ## 指令動作
@@ -70,3 +86,4 @@ git merge origin/master
 
 ```
 ```
+
