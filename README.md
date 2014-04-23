@@ -24,15 +24,13 @@ git-note
 * 遠端 repository
 
 
-## 指令動作
-
-### 開始一個專案
+## 開始新的專案
 
 ```
 git clone https://github.com/jiajhenbee/git-note.git
 ```
 
-* 把 `https://github.com/jiajhenbee/git-note.git` 上的專案 (已經存在的專案) 下載下來到 `git-note` 資料夾
+* 把 `https://github.com/jiajhenbee/git-note.git` 上 (已經存在) 的專案下載下來到 `git-note` 資料夾
 * 預設的 remote 名稱是 `origin`
 
 ```
@@ -43,36 +41,73 @@ git init
 * remote 初始狀態是空的，還未設定
 
 
+## 儲存變更
+
 ### Status
 
 ```
 git status
 ```
 
-功能：查看目前 branch 中所有檔案的狀態
+* 查看目前 branch 中所有檔案的狀態
 
-### Staging (TBD)
+### Staging
 
-```
-git add fileName
-```
+> Stage 是 `git commit` 之前的暫存狀態，只有追蹤的變更會被記錄到 commit 中
 
 ```
-git reset fileName
+git add 檔案名稱
 ```
+* [ ... ]
+
+```
+git reset 檔案名稱
+```
+* [ ... ]
+
+> 可以用 `.` 代表目前資料夾內所有的內容，例如 `git add .` 是把所有檔案加入追蹤
+
 
 ### Commit
 
 ```
+git commit
 git commit -m "commit 說明"
 ```
 
-功能：提交每一次的新增/修改/刪減
-
-### Remote (TBD)
+* 提交每一次的新增/修改/刪減
+* 加入 `-m` 參數直接在後面加上說明文字，不用開啟編輯器
 
 ```
+git reset --hard head^
 ```
+
+* [ ... ]
+
+
+## 分支的相關操作
+
+### branch (TBD)
+
+### checkout (TBD)
+
+
+## Merge & Rebase
+
+### Merge (TBD)
+
+### Rebase (TBD)
+
+
+## 同步
+
+### Remote
+
+```
+git remote -v
+```
+
+* 看目前跟哪些遠端 repository 同步
 
 ### Fetch & Pull
 
@@ -80,13 +115,14 @@ git commit -m "commit 說明"
 git fetch origin [-p]
 ```
 
-功能：將遠端的 origin marster 主支下載最新的版本到本機
+* 將遠端 `origin` 最新的狀態下載到本機
 
 ```
 git pull origin master
 ```
 
-功能：將 origin marster 下載最新的版本到本機並合併
+* 將遠端 `origin` 下載最新的版本到本機，並把遠端的 `master` branch 合併到目前 branch 上
+* 要注意執行的時候位於哪個 branch
 
 > `git pull` 相當於 `git fetch` + `git merge`
 
@@ -99,8 +135,11 @@ git fetch origin
 git merge origin/master
 ```
 
-### Push (TBD)
+### Push
 
 ```
+git push origin master
 ```
+
+* [ ... ]
 
