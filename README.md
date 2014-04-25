@@ -111,11 +111,20 @@ git remote -v
 
 ### Fetch & Pull
 
+git 的記錄分為本機 (local) 和遠端（remote）兩種，可以想像成兩張描圖紙上面的線圖，重疊在一起。
+
+* 當我在 local 的描圖紙上增加新的線段，然後要把這些新的線段描繪到 remote 的描圖紙上分享給別人，這個動作叫 `push`
+* 當別人更新了 remote 的描圖紙，我想要拿回來描繪在 local 的描圖紙上，這個動作叫 `pull`
+
+> 因為兩張描圖紙要能重疊在一起才能描繪，所以重複的線段必須一模一樣才能順利的描繪需要同步的部分
+
 ```
 git fetch origin [-p]
 ```
 
 * 將遠端 `origin` 最新的狀態下載到本機
+* 下載下來之後本機上會出現例如 `origin/branch-name` 的 branch，表示這個是 `origin` 上的 branch，已經下載到本機上
+* 這時候如果執行 `git checkout branch-name` 就會在這個 branch 上建立一個同名的 local branch
 
 ```
 git pull origin master
