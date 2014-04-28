@@ -76,6 +76,8 @@ git add 檔案名稱
 git reset 檔案名稱
 ```
 * [ 還原資料到前一次版本，而更改過的版本將不會存檔 ]
+* `@`等於 HEAD
+* 例如 : `git reset Head^` 等於 `git reset @^` ， `git reset @~2`
 
 > 可以用 `.` 代表目前資料夾內所有的內容，例如 `git add .` 是把所有檔案加入追蹤
 
@@ -96,10 +98,35 @@ git reset --hard head^
 
 * [ ... ]
 
+### Diff
+
+```
+git diff commit A commit B
+```
+```
+git diff HEAD
+```
+* [ ... ]
+
+### Log
+
+```
+git log
+```
+* [ ... ]
+
+
+
 
 ## 分支的相關操作
 
 ### branch (TBD)
+```
+git branch 分支名稱(標簽名稱)
+```
+```
+git branch -d 分支名稱(標簽名稱) 
+```
 
 ### checkout (TBD)
 
@@ -118,8 +145,11 @@ git reset --hard head^
 ```
 git remote -v
 ```
-
 * 看目前跟哪些遠端 repository 同步
+
+```
+git remote add
+```
 
 ### Fetch & Pull
 
@@ -137,13 +167,15 @@ git fetch origin [-p]
 * 將遠端 `origin` 最新的狀態下載到本機
 * 下載下來之後本機上會出現例如 `origin/branch-name` 的 branch，表示這個是 `origin` 上的 branch，已經下載到本機上
 * 這時候如果執行 `git checkout branch-name` 就會在這個 branch 上建立一個同名的 local branch
+* -p [ ... ]
+
 
 ```
 git pull origin master
 ```
 
 * 將遠端 `origin` 下載最新的版本到本機，並把遠端的 `master` branch 合併到目前 branch 上
-* 要注意執行的時候位於哪個 branch
+* 要注意執行的時候位於哪個 branch( ex: master / other branch)
 
 > `git pull` 相當於 `git fetch` + `git merge`
 
@@ -161,6 +193,10 @@ git merge origin/master
 ```
 git push origin master
 ```
-
 * [ ... ]
 
+
+```
+git push -u origin master
+```
+* `-u` [...]
