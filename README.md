@@ -38,9 +38,14 @@ git commit --amend
 
 ### branch
 
-* 一個有名稱的標籤，會隨著 commit 增加而移動
+* branch 的概念可以比喻為「用來命名進度的標籤」
+* 這個標籤標記在 commit 上，而且會隨著新增 commit（版本）而移動到最新的 commit 上
 * 這個標籤之前的所有 commits 串起來的連線稱為一個分支 (branch)
 * 每個專案預設的 branch 名稱叫做 `master`
+* 新增一個 branch 的意思是在目前的 commit（版本）上標記一個新的標籤，表示要從目前這個版本開始一連串新的進度
+
+> 因為 branch 的標記是在一連串 commits 中最新的那一個上，所以代表了這一連串 (版本) 修改的最新進度。
+
 
 ### repository
 
