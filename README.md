@@ -190,6 +190,20 @@ git merge --no-ff 某個分支
 D---E-----------H  ← master
 ```
 
+> 這時候 `topic` 的進度就算完成了，可以用 `git -d topic` 刪掉這個 branch (標籤)
+
+### Pull Request
+
+* **Pull Request** 是 GitHub 提供的功能，通知一起協作的成員有某個 branch 的變更要 merge 進另外一個 branch
+* 在 GitHub 頁面上會顯示這個要 merge 進來的變更有哪些 commits，所有加總起來的變更內容 (diff)
+* 如果沒有這些變更和要合併的一個分支內容沒有衝突 (conflicts)，GitHub 頁面也提供了 merge 按鈕；如果有衝突就要手動解決後把新增的 commit push 上去
+
+> Pull Request 預設的 merge 方式是 `--no-ff`，所以在版本線圖上可以很清楚的區分進度的變化
+
+
+## Conflicts (TBD)
+
+
 
 ## Rebase (TBD)
 
