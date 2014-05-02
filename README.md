@@ -131,11 +131,35 @@ git branch -d 分支名稱(標簽名稱)
 ### checkout (TBD)
 
 
-## Merge & Rebase
+## Merge
 
-### Merge (TBD)
+### Merge
 
-### Rebase (TBD)
+```
+git merge 某個分支
+```
+
+* 把 `某個分支` 的變更合併到目前的 branch 上，新增一個併在一起的 commit
+
+> 例如在 `master` 上執行 `git merge topic`：
+
+
+```
+      A---B---C  topic
+     /
+D---E---F---G  master
+```
+
+> 就會把 `topic` 上不同於 `master` 的 (A、B、C) 變更合併到 `master` 上，記錄成一個新的 commit `H`，這時候 `master` 標籤原本在 `G`，因為新增了 commit 所以移動到 `H`；而因為 merge 的動作並不是在 `topic` branch 上進行，所以 `topic` 標籤維持在 `C` commit 上。
+
+```
+      A---B---C  topic
+     /         \
+D---E---F---G---H  master
+```
+
+
+## Rebase (TBD)
 
 
 ## 同步
