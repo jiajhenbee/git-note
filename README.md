@@ -141,21 +141,39 @@ git merge 某個分支
 
 * 把 `某個分支` 的變更合併到目前的 branch 上，新增一個併在一起的 commit
 
-> 例如在 `master` 上執行 `git merge topic`：
+例如在 `master` 上執行 `git merge topic`：
 
 
 ```
-      A---B---C  topic
+      A---B---C  ← topic
      /
-D---E---F---G  master
+D---E---F---G  ← master
 ```
 
-> 就會把 `topic` 上不同於 `master` 的 (A、B、C) 變更合併到 `master` 上，記錄成一個新的 commit `H`，這時候 `master` 標籤原本在 `G`，因為新增了 commit 所以移動到 `H`；而因為 merge 的動作並不是在 `topic` branch 上進行，所以 `topic` 標籤維持在 `C` commit 上。
+就會把 `topic` 上不同於 `master` 的 (A、B、C) 變更合併到 `master` 上，記錄成一個新的 commit `H`，這時候 `master` 標籤原本在 `G`，因為新增了 commit 所以移動到 `H`；而因為 merge 的動作並不是在 `topic` branch 上進行，所以 `topic` 標籤維持在 `C` commit 上。
 
 ```
-      A---B---C  topic
+      A---B---C  ← topic
      /         \
-D---E---F---G---H  master
+D---E---F---G---H  ← master
+```
+
+### Fast-Forward
+
+如果 `topic` 是基於 `master` 上的版本繼續新增的變更，而且 `master` 上在 `topic` 分支分出去後沒有額外的變化 (上移個示意圖的 F、G commits)，這時候在 `master`上執行 `git merge topic`：
+
+```
+D---E---A---B---C
+    ↑           ↑
+  master      topic
+```
+
+就會直接把 `master` 移動到 `topic` 上，稱為 **fast-forward**
+
+```
+D---E---A---B---C ← master
+                ↑
+              topic
 ```
 
 
