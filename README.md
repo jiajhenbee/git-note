@@ -176,6 +176,20 @@ D---E---A---B---C ← master
               topic
 ```
 
+### --no-ff
+
+```
+git merge --no-ff 某個分支
+```
+
+如果在上述的情況下希望多增加一個 commit 記錄進度完成，可以加上 `--no-ff` 產生比較好看的版本線圖 (在 `master` 上執行 `git merge --no-ff topic`)：
+
+```
+      A---B---C  ← topic
+     /         \
+D---E-----------H  ← master
+```
+
 
 ## Rebase (TBD)
 
