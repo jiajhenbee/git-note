@@ -1,5 +1,16 @@
 git-note
 ========
+### 注意
+* 一個專案不允許有雙重 git 管理（在 git 專案裡面包了其他的 git 專案） 
+* 若出現雙重管理則解法如下：
+
+> 1. 為求保險，先把架目錄下有 git 管理的資料夾複製到它地備份
+> 2. `cd “資料夾”` 進資料夾
+> 3. `rm -rfv .gitignore .git` 刪除資料夾裡面的 git `.git` 的目錄
+> 4. `cd ..` 回上一層資料夾
+> 5. `git status` 確認資料有否正確
+> 6. `commit`
+
 
 ## 名詞
 
@@ -106,7 +117,7 @@ git diff commit A commit B
 ```
 git diff HEAD
 ```
-* [ ... ]
+* [ 比較現在最新標簽和前一次 commit 的差異]
 
 ### Log
 
@@ -237,8 +248,8 @@ git fetch origin [-p]
 * 將遠端 `origin` 最新的狀態下載到本機
 * 下載下來之後本機上會出現例如 `origin/branch-name` 的 branch，表示這個是 `origin` 上的 branch，已經下載到本機上
 * 這時候如果執行 `git checkout branch-name` 就會在這個 branch 上建立一個同名的 local branch
-* -p [ ... ]
-
+* -p 
+> 比較遠端與本雞的差別。`git pull` 和 `git fetch` 不會清除已經被刪掉的 branch，所以要用 `git fetch -p`。
 
 ```
 git pull origin master
@@ -263,8 +274,9 @@ git merge origin/master
 ```
 git push origin master
 ```
-* [ ... ]
+* 將本機端所變動的 commit 推到遠端並同步
 
+> push 時不用切到特定位置即可推 origin，但 pull 則需注意自己的位置
 
 ```
 git push -u origin master
