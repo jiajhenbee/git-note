@@ -29,6 +29,12 @@ git-note
 
 > Commit v1 是專案開始的狀態，commit v2 記錄的是「相較於 v1 改了哪些東西」，commit v3 記錄的是「相較於 v2 改了哪些東西」，所以將 v1 + v2 + v3 + v4 的 commit 內容疊加起來就是目前專案的狀態。正因為這些版本的歷史記錄是連續的，所以在這個連續線段上的任何一個記錄點上都有辦法還原當時專案的狀態。
 
+```
+git commit --amend
+```
+* 更動最後一次 commit 或 push 
+> 最常發生在太早送出 commit 或忘了加入某些檔案、或 commit 訊息有誤
+
 
 ### branch
 
@@ -106,8 +112,8 @@ git commit -m "commit 說明"
 ```
 git reset --hard head^
 ```
-
 * [ ... ]
+
 
 ### Diff
 
@@ -119,6 +125,7 @@ git diff HEAD
 ```
 * [ 比較現在最新標簽和前一次 commit 的差異]
 
+
 ### Log
 
 ```
@@ -126,21 +133,30 @@ git log
 ```
 * [ ... ]
 
-
+```
+git hist
+```
+* [ ... ]
 
 
 ## 分支的相關操作
 
-### branch (TBD)
+### branch
 ```
 git branch 分支名稱(標簽名稱)
 ```
+* 開新分支
+ 
 ```
 git branch -d 分支名稱(標簽名稱) 
 ```
+* 刪除分支
 
-### checkout (TBD)
-
+### checkout
+```
+git checkout 分支名稱(標簽名稱)
+```
+* 任意到分支（標簽）的位置
 
 ## Merge
 
