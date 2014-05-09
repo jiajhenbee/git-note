@@ -115,9 +115,19 @@ git commit -m "commit 說明"
 * 加入 `-m` 參數直接在後面加上說明文字，不用開啟編輯器
 
 ```
+git reset head^
+```
+* 取消最近一個 commit，保留 commit 更改的內容，`git status` 會顯示有紅色的變更
+
+```
+git reset head^
+```
+* 取消最近一個 commit，保留 commit 更改的內容並且留在 staged 暫存區，`git status` 會顯示變更是綠色
+
+```
 git reset --hard head^
 ```
-* [ ... ]
+* 放棄最近一個 commit，丟掉整個 commit 的內容
 
 
 ### Diff
@@ -210,6 +220,14 @@ git checkout 新的分支名稱
 ```
 
 > 習慣上 `git checkout '任意 commit 編號'` (或 `git checkout head~3`) 會用來查看某個版本的樣子，如果要新增變更就會搭配 `git checkout -b 新的分支名稱` 一起使用。
+
+```
+git reset --hard '任意 commit 編號'
+```
+
+* `git checkout` 只是切換過去某個版本查看內容
+* `git reset --hard` 則可以把 branch 標籤移動到任何 commit 上
+
 
 ## Merge
 
