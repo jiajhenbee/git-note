@@ -29,12 +29,6 @@ git-note
 
 > Commit v1 是專案開始的狀態，commit v2 記錄的是「相較於 v1 改了哪些東西」，commit v3 記錄的是「相較於 v2 改了哪些東西」，所以將 v1 + v2 + v3 + v4 的 commit 內容疊加起來就是目前專案的狀態。正因為這些版本的歷史記錄是連續的，所以在這個連續線段上的任何一個記錄點上都有辦法還原當時專案的狀態。
 
-```
-git commit --amend
-```
-* 更動最後一次 commit 或 push 
-> 最常發生在太早送出 commit 或忘了加入某些檔案、或 commit 訊息有誤
-
 
 ### branch
 
@@ -107,12 +101,18 @@ git reset 檔案名稱
 ### Commit
 
 ```
-git commit
-git commit -m "commit 說明"
+git commit [-m "commit 說明"]
 ```
-
 * 提交每一次的新增/修改/刪減
 * 加入 `-m` 參數直接在後面加上說明文字，不用開啟編輯器
+* 加上 `-a` 相當於在 commit 之前執行 `git add .`
+
+```
+git commit --amend
+```
+* 更動最近一個 commit
+
+> 最常發生在太早送出 commit 或忘了加入某些檔案、或 commit 訊息有誤
 
 ```
 git reset head^
