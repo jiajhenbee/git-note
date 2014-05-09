@@ -128,7 +128,7 @@ git diff commit A commit B
 ```
 git diff HEAD
 ```
-* [ 比較現在最新標簽和前一次 commit 的差異]
+* [ 比較現在最新標籤和前一次 commit 的差異]
 
 
 ### Log
@@ -147,21 +147,33 @@ git hist
 ## 分支的相關操作
 
 ### branch
+
 ```
-git branch 分支名稱(標簽名稱)
+git branch
+```
+
+* 列出目前本地的分支
+
+```
+git branch 分支名稱(標籤名稱)
 ```
 * 開新分支
- 
+
 ```
-git branch -d 分支名稱(標簽名稱) 
+git branch -d 分支名稱(標籤名稱)
 ```
 * 刪除分支
 
+> commits 連線的尾端如果沒有 branch (標籤)標記，就不會出現在版本線圖上，所以刪掉 branch 就等於遺失了這些 commits (版本)
+
+* 如果刪除 branch 會造成目前線圖上的 commits 遺失 (通常是 branch 還沒有 merge 的情況) `-d` 的刪除方式會顯示警告
+* 要強制刪除還未 merge 的 branch 需要改用 `git branch -D 分支名稱`
+
 ### checkout
 ```
-git checkout 分支名稱(標簽名稱)
+git checkout 分支名稱(標籤名稱)
 ```
-* 任意到分支（標簽）的位置
+* 任意到分支（標籤）的位置
 
 ## Merge
 
