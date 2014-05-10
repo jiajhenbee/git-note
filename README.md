@@ -29,18 +29,17 @@ git-note
 
 > Commit v1 是專案開始的狀態，commit v2 記錄的是「相較於 v1 改了哪些東西」，commit v3 記錄的是「相較於 v2 改了哪些東西」，所以將 v1 + v2 + v3 + v4 的 commit 內容疊加起來就是目前專案的狀態。正因為這些版本的歷史記錄是連續的，所以在這個連續線段上的任何一個記錄點上都有辦法還原當時專案的狀態。
 
-```
-git commit --amend
-```
-* 更動最後一次 commit 或 push 
-> 最常發生在太早送出 commit 或忘了加入某些檔案、或 commit 訊息有誤
-
 
 ### branch
 
-* 一個有名稱的標籤，會隨著 commit 增加而移動
+* branch 的概念可以比喻為「用來命名進度的標籤」
+* 這個標籤標記在 commit 上，而且會隨著新增 commit（版本）而移動到最新的 commit 上
 * 這個標籤之前的所有 commits 串起來的連線稱為一個分支 (branch)
 * 每個專案預設的 branch 名稱叫做 `master`
+* 新增一個 branch 的意思是在目前的 commit（版本）上標記一個新的標籤，表示要從目前這個版本開始一連串新的進度
+
+> 因為 branch 的標記是在一連串 commits 中最新的那一個上，所以代表了這一連串 (版本) 修改的最新進度。
+
 
 ### repository
 
@@ -102,17 +101,33 @@ git reset 檔案名稱
 ### Commit
 
 ```
-git commit
-git commit -m "commit 說明"
+git commit [-m "commit 說明"]
 ```
-
 * 提交每一次的新增/修改/刪減
 * 加入 `-m` 參數直接在後面加上說明文字，不用開啟編輯器
+* 加上 `-a` 相當於在 commit 之前執行 `git add .`
+
+```
+git commit --amend
+```
+* 更動最近一個 commit
+
+> 最常發生在太早 commit 忘了加入某些檔案、或 commit 訊息有誤
+
+```
+git reset head^
+```
+* 取消最近一個 commit，保留 commit 更改的內容，`git status` 會顯示有紅色的變更
+
+```
+git reset head^
+```
+* 取消最近一個 commit，保留 commit 更改的內容並且留在 staged 暫存區，`git status` 會顯示變更是綠色
 
 ```
 git reset --hard head^
 ```
-* [ ... ]
+* 放棄最近一個 commit，丟掉整個 commit 的內容
 
 
 ### Diff
@@ -123,7 +138,7 @@ git diff commit A commit B
 ```
 git diff HEAD
 ```
-* [ 比較現在最新標簽和前一次 commit 的差異]
+* [ 比較現在最新標籤和前一次 commit 的差異]
 
 
 ### Log
@@ -142,21 +157,76 @@ git hist
 ## 分支的相關操作
 
 ### branch
+
 ```
-git branch 分支名稱(標簽名稱)
+git branch
+```
+
+* 列出目前本地的分支
+
+```
+git branch 分支名稱(標籤名稱)
 ```
 * 開新分支
- 
+
 ```
-git branch -d 分支名稱(標簽名稱) 
+git branch -d 分支名稱(標籤名稱)
 ```
 * 刪除分支
 
+> commits 連線的尾端如果沒有 branch (標籤)標記，就不會出現在版本線圖上，所以刪掉 branch 就等於遺失了這些 commits (版本)
+
+* 如果刪除 branch 會造成目前線圖上的 commits 遺失 (通常是 branch 還沒有 merge 的情況) `-d` 的刪除方式會顯示警告
+* 要強制刪除還未 merge 的 branch 需要改用 `git branch -D 分支名稱`
+
 ### checkout
+
+`checkout` 的功能是把專案的內容恢復成某個版本的狀態
+
 ```
-git checkout 分支名稱(標簽名稱)
+git checkout 分支名稱(標籤名稱)
 ```
-* 任意到分支（標簽）的位置
+* 切換到任意到分支（標籤）的位置，檔案的內容會還原成專案進行到該 commit 版本所記錄的樣子
+
+```
+git checkout '任意 commit 編號'
+```
+* 切換到任意 commit 的狀態
+* 在這個情況下 git 會顯示類似的訊息：
+
+```
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 8c8952e...
+```
+
+這表示現在的位置並不在任何 branch (標籤)上，即使是 checkout 標籤所標示的同一個 commit 編號也會發生。不在 branch 上的狀態並不影響「查看 (checkout) 某一個版本」這個動作，唯一的影響是：如果不是在 branch 上新增的 commits，一旦 checkout 其他版本，就會找不到剛才新增的 commits (因為不會顯示在線圖上)
+
+```
+git checkout -b 新的分支名稱
+
+# 相當於底下兩個步驟
+
+git branch 新的分支名稱
+git checkout 新的分支名稱
+```
+
+習慣上 `git checkout '任意 commit 編號'` (或 `git checkout head~3`) 會用來查看某個版本的樣子，如果要新增變更就會搭配 `git checkout -b 新的分支名稱` 一起使用。
+
+```
+git reset --hard '任意 commit 編號'
+```
+
+* `git checkout` 只是切換過去某個版本查看內容
+* `git reset --hard` 則可以把 branch 標籤移動到任何 commit 上
+
 
 ## Merge
 
@@ -177,7 +247,7 @@ git merge 某個分支
 D---E---F---G  ← master
 ```
 
-就會把 `topic` 上不同於 `master` 的 (A、B、C) 變更合併到 `master` 上，記錄成一個新的 commit `H`，這時候 `master` 標籤原本在 `G`，因為新增了 commit 所以移動到 `H`；而因為 merge 的動作並不是在 `topic` branch 上進行，所以 `topic` 標籤維持在 `C` commit 上。
+就會把 `topic` 上不同於 `master` 的 (A、B、C) 變更合併到 `master` 上，記錄成一個新的 commit `H`，這時候 `master` 標籤原本在 `G`，因為新增了 commit 所以移動到 `H`；而因為 merge 的動作並不是在 `topic` branch 上進行，所以 `topic` 標籤維持在 commit `C` 上。
 
 ```
       A---B---C  ← topic
@@ -187,7 +257,7 @@ D---E---F---G---H  ← master
 
 ### Fast-Forward
 
-如果 `topic` 是基於 `master` 上的版本繼續新增的變更，而且 `master` 上在 `topic` 分支分出去後沒有額外的變化 (上移個示意圖的 F、G commits)，這時候在 `master`上執行 `git merge topic`：
+如果 `topic` 是基於 `master` 上的版本繼續新增的變更，而且 `master` 上在 `topic` 分支分出去後沒有額外的變化 (沒有上一個示意圖的 commits F、G)，這時候在 `master`上執行 `git merge topic`：
 
 ```
 D---E---A---B---C
@@ -264,8 +334,9 @@ git fetch origin [-p]
 * 將遠端 `origin` 最新的狀態下載到本機
 * 下載下來之後本機上會出現例如 `origin/branch-name` 的 branch，表示這個是 `origin` 上的 branch，已經下載到本機上
 * 這時候如果執行 `git checkout branch-name` 就會在這個 branch 上建立一個同名的 local branch
-* -p 
-> 比較遠端與本雞的差別。`git pull` 和 `git fetch` 不會清除已經被刪掉的 branch，所以要用 `git fetch -p`。
+* 加上 `-p` 檢查在遠端已經刪掉的 branch 是不是還留在本機的記錄上
+
+> `git pull` 和 `git fetch` 不會清除已經被刪掉的 branch，所以要用 `git fetch -p`。
 
 ```
 git pull origin master
