@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # 名詞解釋
 
@@ -156,10 +157,16 @@ git push -u origin master
 ```
 * `-u` [...]
 =======
+=======
+>>>>>>> origin/separate-topics
 在開始之前
 ========
 
 ## 名詞解釋
 
+<<<<<<< HEAD
+## 開始新的專案
+>>>>>>> origin/separate-topics
+=======
 ## 開始新的專案
 >>>>>>> origin/separate-topics
