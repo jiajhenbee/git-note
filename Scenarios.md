@@ -21,3 +21,9 @@ Git 狀況劇
 > 5. `git status` 確認資料有否正確
 > 6. `commit`
 
+
+### git 迷失
+* git 迷失在某個 commit 後，處理方式如下：
+
+> 1. ``` git checkout branch ```
+> 2. ``` git pull ``` ; ``` git merge``` 
